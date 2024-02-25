@@ -1,4 +1,4 @@
-#![allow(non_snake_case)]
+#![allow(non_snake_case, unused)]
 
 use dioxus_daisyui_admin_protal::app::App;
 use log::{info, warn, LevelFilter};

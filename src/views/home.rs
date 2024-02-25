@@ -10,6 +10,7 @@ pub(crate) fn Home(cx: Scope) -> Element {
 
     div{
         "router div",
+        img{class:"w-12 inline-block mr-2 mask mask-circle", alt:"dashwind-logo",src:"../logo192.png"}
         button{class:"btn btn_primary",
             onclick: move |_|{
                 nav.push("/home/c2");
@@ -19,3 +20,4 @@ pub(crate) fn Home(cx: Scope) -> Element {
         Outlet::<Route> {}
     })
 }
+

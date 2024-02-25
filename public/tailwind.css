@@ -994,6 +994,11 @@ html {
   margin-inline-end: -1rem;
 }
 
+.link {
+  cursor: pointer;
+  text-decoration-line: underline;
+}
+
 .mask {
   -webkit-mask-size: contain;
           mask-size: contain;
@@ -1238,6 +1243,16 @@ html {
   text-align: inherit;
 }
 
+.link:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
 .mask-circle {
   -webkit-mask-image: url("data:image/svg+xml,%3csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle fill='black' cx='100' cy='100' r='100' fill-rule='evenodd'/%3e%3c/svg%3e");
           mask-image: url("data:image/svg+xml,%3csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle fill='black' cx='100' cy='100' r='100' fill-rule='evenodd'/%3e%3c/svg%3e");
@@ -1352,6 +1367,10 @@ html {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+.artboard.phone {
+  width: 320px;
 }
 
 .mx-auto {

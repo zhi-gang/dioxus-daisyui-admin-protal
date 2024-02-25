@@ -1,7 +1,9 @@
 #![allow(non_snake_case)]
 
-use crate::views::{home::Home, login::Login, page_not_found::PageNotFound};
-use crate::components::{c1::C1, c2::C2};
+use crate::components::{
+    c1::C1, c2::C2, forget_form::ForgetForm, login_form::LoginForm, register_form::RegisterForm,
+};
+use crate::views::{home::Home, login::Login, page_not_found::PageNotFound, root::Root};
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 
@@ -9,9 +11,19 @@ use dioxus_router::prelude::*;
 #[rustfmt::skip]
 pub enum Route {
     #[route("/")]
-        #[redirect("/login",||Route::Login {})]
-    #[route("/login")]
-    Login {},
+    Root {},
+
+    #[nest("/login")]
+    #[layout(Login)]
+        #[route("/")]
+            LoginForm {},
+        #[route("/forget")]
+            ForgetForm {},
+        #[route("/register")]
+            RegisterForm {},
+        
+    #[end_layout]
+    #[end_nest]
 
     #[nest("/home")]
     #[layout(Home)]
