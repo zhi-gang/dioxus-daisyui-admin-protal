@@ -14,15 +14,6 @@ pub fn RegisterForm(cx: Scope) -> Element {
                 onsubmit: move |ev|{
                     info!("ev, {:?}",ev.values);
                     error_info.set("not implemented yet".to_string());
-                    // if ev.values["username"].len() ==0 || ev.values["username"].get(0).unwrap().len()==0{
-                    //     error_info.set("username is required".to_string());
-                    // }else if ev.values["password"].len() ==0 || ev.values["password"].get(0).unwrap().len()==0{
-                    //     error_info.set("password is required".to_string());
-                    // }else{
-                    //     info!("login: user: {:?}, pwd: {:?} ", ev.values["username"].get(0).unwrap(),ev.values["password"].get(0).unwrap());
-                    //     //invok auth api
-                    //     nav.push("/home");
-                    // }
                     ev.stop_propagation();
                 },
                 div{class:"mb-4",
@@ -60,7 +51,7 @@ pub fn RegisterForm(cx: Scope) -> Element {
                 }
                 div{class:"text-center mt-4", "Already have an account yet?",
                     Link{to:"/login",
-                        span{class:"inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200", "Login"}
+                        span{class:"inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200", " Login"}
                     }
                 }
             }

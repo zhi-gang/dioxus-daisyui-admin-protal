@@ -47,7 +47,7 @@ pub fn LoginForm(cx: Scope) -> Element {
                 }
                 div{class:"text-center mt-4", "Don't have an account yet?",
                     Link{to:"/login/register",
-                        span{class:"inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200", "Register"}
+                        span{class:"inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200", " Register"}
                     }
                 }
             }

@@ -13,42 +13,30 @@ pub fn ForgetForm(cx: Scope) -> Element {
             form{class:"ml-6 mr-6",
                 onsubmit: move |ev|{
                     info!("ev, {:?}",ev.values);
-                    error_info.set("".to_string());
-                    if ev.values["username"].len() ==0 || ev.values["username"].get(0).unwrap().len()==0{
-                        error_info.set("username is required".to_string());
-                    }else if ev.values["password"].len() ==0 || ev.values["password"].get(0).unwrap().len()==0{
-                        error_info.set("password is required".to_string());
-                    }else{
-                        info!("login: user: {:?}, pwd: {:?} ", ev.values["username"].get(0).unwrap(),ev.values["password"].get(0).unwrap());
-                        //invok auth api
-                        nav.push("/home");
-                    }
+                    error_info.set("Not implemented".to_string());
                     ev.stop_propagation();
                 },
                 div{class:"mb-4",
                     div{class:"form-control w-full mt-4",
                         label{class:"label",
-                            span{class:"label-text text-base-content undefined","User Name"}
+                            span{class:"label-text text-base-content undefined","Phone"}
                         }
                     }
-                    input{class:"input  input-bordered w-full ",r#type:"Text",name:"username"}
+                    input{class:"input  input-bordered w-full ",r#type:"text",name:"phone"}
                     div{class:"form-control w-full mt-4",
                         label{class:"label",
-                            span{class:"label-text text-base-content undefined","Password"}
+                            span{class:"label-text text-base-content undefined","Code"}
                         }
                     }
-                    input{class:"input  input-bordered w-full ",r#type:"Text",name:"password"}
+                    input{class:"input  input-bordered w-full ",r#type:"number",name:"code"}
                 }
                 div{class:"text-right text-primary",
-                    Link{to:"/forgot-password",
-                        span{class:"text-sm  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200","Forgot Password?"}
-                    }
                     p{class:"text-center  text-error mt-8","{error_info}"}
-                    button{r#type:"submit", class:"btn mt-2 w-full btn-primary","Login"}
+                    button{r#type:"submit", class:"btn mt-2 w-full btn-primary","Get Authenticate Code"}
                 }
-                div{class:"text-center mt-4", "Don't have an account yet?",
-                    Link{to:"/login/register",
-                        span{class:"inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200", "Register"}
+                div{class:"text-center mt-4", "Try login again?",
+                    Link{to:"/login",
+                        span{class:"inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200", " Login"}
                     }
                 }
             }
