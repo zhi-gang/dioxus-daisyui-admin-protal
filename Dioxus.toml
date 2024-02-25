@@ -1,0 +1,75 @@
+[application]
+
+# dioxus project name
+name = "dioxus-daisyui-admin-protal"
+
+# default platfrom
+# you can also use `dx serve/build --platform XXX` to use other platform
+# value: web | desktop
+default_platform = "web"
+
+# Web `build` & `serve` dist path
+out_dir = "dist"
+
+# resource (static) file folder
+asset_dir = "public"
+
+[web.app]
+
+# HTML title tag content
+title = "Dioxus | DaisyUI"
+
+[web.watcher]
+
+index_on_404 = true
+
+watch_path = ["src", "public"]
+
+# include `assets` in web platform
+[web.resource]
+
+# CSS style file
+style = ["tailwind.css"]
+
+# Javascript code file
+script = []
+
+[web.resource.dev]
+
+# Javascript code file
+# serve: [dev-server] only
+script = []
+
+[application.plugins]
+
+available = true
+
+required = []
+
+[bundler]
+# Bundle identifier
+identifier = "io.github.Dioxus"
+
+# Bundle publisher
+publisher = "zg.y"
+
+# Bundle icon
+icon = ["public/logo192.png"]
+
+# Bundle resources
+resources = ["public/*"]
+
+# Bundle copyright
+copyright = "MIT"
+
+# Bundle category
+category = "Utility"
+
+# Bundle short description
+short_description = "An amazing dioxus application."
+
+# Bundle long description
+long_description = """
+An amazing dioxus application.
+"""
+
