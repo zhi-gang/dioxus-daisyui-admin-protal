@@ -1,11 +1,10 @@
 
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
-use dioxus_router::{components::Link, hooks::use_navigator};
+use dioxus_router::components::Link;
 use log::info;
 #[component]
 pub fn RegisterForm(cx: Scope) -> Element {
-    let nav = use_navigator(cx);
     let error_info = use_state(cx, || "".to_string());
     cx.render(rsx!{
         div{class:"py-24 px10",
