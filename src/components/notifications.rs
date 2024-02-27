@@ -20,7 +20,7 @@ pub fn Notifications(cx: Scope) -> Element {
                 ondblclick:move |_|{
                     notification_list.with_mut(|list:&mut NotificationList|{
                         if let Some(index) = list.iter().position(|value| *value == n1) {
-                            list.swap_remove(index);
+                            list.remove(index);
                         }
                     })
                 },
