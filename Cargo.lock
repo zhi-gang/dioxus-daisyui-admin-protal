@@ -640,6 +640,7 @@ dependencies = [
  "log",
  "serde",
  "serde_json",
+ "web-sys",
 ]
 
 [[package]]
