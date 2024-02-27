@@ -12,3 +12,4 @@ pub mod dropdown_menu_item;
 pub mod customized_svg;
 pub mod notifications;
 pub mod bell;
+pub mod notification_maker;

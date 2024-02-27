@@ -2,7 +2,7 @@
 use dioxus::prelude::*;
 use log::info;
 
-use crate::{components::customized_svg::CustomizedSvg5, services::notification::NotificationList, views::home::ShowNotications};
+use crate::{components::customized_svg::{CustomizedSvg5, CustomizedSvg6}, services::notification::{NotificationLevels, NotificationList}, views::home::ShowNotications};
 
 #[component]
 pub fn Notifications(cx: Scope) -> Element {
@@ -10,21 +10,44 @@ pub fn Notifications(cx: Scope) -> Element {
     let notification_list = use_shared_state::<NotificationList>(cx).unwrap();
     let notifs = notification_list.read();
 
-    
-
     let nodes = notifs.iter().map(|n|{
         let n1 = n.clone();
+        let n2 = n.clone();
+        let bg=
+        match n1.level {
+            NotificationLevels::Info=> "bg-accent",
+            NotificationLevels::Warn=> "bg-primary",
+            NotificationLevels::Error=> "bg-secondary",
+        };
         rsx!{
+            
             div{class:"grid mt-3 card bg-base-200 rounded-box p-3 ",
-                prevent_default:"onclick",
-                ondblclick:move |_|{
-                    notification_list.with_mut(|list:&mut NotificationList|{
-                        if let Some(index) = list.iter().position(|value| *value == n1) {
-                            list.remove(index);
-                        }
-                    })
-                },
-                "{n.level:?}: {n1.msg}",
+                // prevent_default:"onclick",
+                // ondblclick:move |_|{
+                //     info!("remove");
+                //     notification_list.with_mut(|list:&mut NotificationList|{
+                //         if let Some(index) = list.iter().position(|value| *value == n1) {
+                //             list.remove(index);
+                //         }
+                //     })
+                // },
+                div{class:"flex items-stretch",
+                    div{class:"flex-1",
+                        span{class:"flex-1, absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg {bg}"}
+                        label{class:"fles-2","{n.level:?}: {n1.msg}"},
+                    }
+                    div{class:"flex-none justify-items-end",
+                        onclick:move |_|{
+                            info!("remove");
+                            notification_list.with_mut(|list:&mut NotificationList|{
+                                if let Some(index) = list.iter().position(|value| *value == n2) {
+                                    list.remove(index);
+                                }
+                            })
+                        },
+                        CustomizedSvg6{d:"m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"}
+                    }
+                }
             }
         }
     });
@@ -42,11 +65,7 @@ pub fn Notifications(cx: Scope) -> Element {
                     }
                     div{class:"overflow-y-auto pl-4 pr-4",
                         div{class:"flex flex-col w-full",
-                            div{class:"grid mt-3 card bg-base-200 rounded-box p-3 bg-blue-100","Your sales has increased by 30% yesterday"}
-                            div{class:"grid mt-3 card bg-base-200 rounded-box p-3 ","Your sales has increased by 30% yesterday"}
-                            
                             nodes    
-                                
                         }
                         
                     }
