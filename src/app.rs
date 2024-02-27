@@ -2,7 +2,9 @@
 
 use dioxus::prelude::*;
 use dioxus_router::components::Router;
-use crate::route::Route;
+use crate::{route::Route, services::notification::NotificationList};
+
+
 
 pub fn App(cx: Scope) -> Element {
     let create_eval = use_eval(cx);
@@ -10,6 +12,8 @@ pub fn App(cx: Scope) -> Element {
     let mode = use_shared_state::<String>(cx).unwrap();
     let _eval = create_eval(&*format!("document.documentElement.setAttribute(\"data-theme\", '{}');",*mode.read())).unwrap();
 
+    use_shared_state_provider::<NotificationList>(cx, ||Vec::new());
+    
     render! {
         style { include_str!("../public/tailwind.css") }
         head{
