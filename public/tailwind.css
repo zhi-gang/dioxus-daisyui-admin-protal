@@ -2908,6 +2908,10 @@ html:has(.drawer-toggle:checked) {
   margin-top: 2rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .inline-block {
   display: inline-block;
 }

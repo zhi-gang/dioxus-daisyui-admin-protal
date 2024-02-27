@@ -5,7 +5,7 @@ use dioxus_router::components::Link;
 use crate::views::home::MenuItemType;
 
 #[component]
-pub fn MenuItem<'a>(cx: Scope, item_type: MenuItemType, item_name: &'a str ,url: &'a str, d:&'a str) -> Element {
+pub fn MenuItem<'a>(cx: Scope, item_type: MenuItemType ,url: &'a str, d:&'a str) -> Element {
     let menu_selection= use_shared_state::<MenuItemType>(cx).unwrap();
     render!{
         li{class:"",
@@ -18,10 +18,10 @@ pub fn MenuItem<'a>(cx: Scope, item_type: MenuItemType, item_name: &'a str ,url:
                     // bolded.set("font-bold");
                     render!{
                         span{class:"absolute inset-y-0 left-0 w-1 rounded-tr-md rounded-br-md bg-primary"}
-                        label{class:"font-bold","{item_name}"}
+                        label{class:"font-bold","{item_type.to_string()}"}
                     }
                 }else{
-                    render!{label{class:"font-normal","{item_name}"}}
+                    render!{label{class:"font-normal","{item_type.to_string()}"}}
                 }
                 
             }
