@@ -1,8 +1,8 @@
 #![allow(non_snake_case)]
 
 use crate::components::{
-    dashboard::Dashboard, forget_form::ForgetForm, info::Info, login_form::LoginForm,
-    register_form::RegisterForm,
+    dashboard::Dashboard, forget_form::ForgetForm, info::Info, leads::Leads, login_form::LoginForm,
+    register_form::RegisterForm,transactions::Transactions
 };
 use crate::views::{home::Home, login::Login, page_not_found::PageNotFound, root::Root};
 use dioxus::prelude::*;
@@ -32,6 +32,10 @@ pub enum Route {
             Info {},
         #[route("/dashboard")]
             Dashboard {},
+        #[route("/leads")]
+            Leads {},
+        #[route("/transactions")]
+            Transactions {},
     #[end_layout]
     #[end_nest]
     // Finally, we need to handle the 404 page

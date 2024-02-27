@@ -6,3 +6,6 @@ pub mod register_form;
 pub mod forget_form;
 pub mod theme;
 pub mod menu_item;
+pub mod leads;
+pub mod transactions;
+pub mod dropdown_menu_item;
