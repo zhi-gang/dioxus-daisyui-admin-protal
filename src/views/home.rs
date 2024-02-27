@@ -13,6 +13,12 @@ pub enum MenuItemType{
     Transactions,
 }
 
+#[derive(Debug,PartialEq, Clone)]
+pub enum ShowNotications{
+    Show,
+    Hide
+}
+
 impl MenuItemType {
     pub fn to_string(&self) -> String {
         match self {
@@ -27,6 +33,8 @@ impl MenuItemType {
 pub fn Home(cx: Scope) ->Element {
     use_shared_state_provider::<MenuItemType>(cx, ||MenuItemType::Home);
     let menu_selection= use_shared_state::<MenuItemType>(cx).unwrap();
+    use_shared_state_provider::<ShowNotications>(cx, ||ShowNotications::Hide);
+    let show_notifications= use_shared_state::<ShowNotications>(cx).unwrap();
     render!{
         div{class:"drawer lg:drawer-open",
             input{id:"my-drawer-2", r#type:"checkbox", class:"drawer-toggle"}
@@ -35,16 +43,18 @@ pub fn Home(cx: Scope) ->Element {
                     div{class:"flex-1",
                         label{r#for:"my-drawer-2", class:"btn btn-primary drawer-button lg:hidden",
                             svg{xmlns:"http://www.w3.org/2000/svg", fill:"none",  stroke:"currentColor" ,class:"h-5 inline-block w-5 stroke-2",
-                                path{d:"M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",style:"stroke-linecap:round;stroke-linejoin:round"}
+                                path{d:"M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"}
                             }
                         }
                         h1{class:"text-2xl font-semibold ml-2","{(*menu_selection.read()).to_string()}"}
                     }
                     Theme {}
-                    button{class:"drawer-button btn btn-ghost ml-4  btn-circle",
+                   
+                    button{class:"btn btn-ghost ml-4  btn-circle",
                         div{class:"indicator",
+                            onclick: move |_|show_notifications.with_mut(|m|*m=ShowNotications::Show),
                             svg{xmlns:"http://www.w3.org/2000/svg", fill:"none",  stroke:"currentColor" ,class:"h-5 inline-block w-5 stroke-2",
-                                path{style:"stroke-linecap:round;stroke-linejoin:round", d:"M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"}
+                                path{d:"M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"}
                             }
                             span{class:"indicator-item badge badge-secondary badge-sm", "15"}
                         }
@@ -69,7 +79,44 @@ pub fn Home(cx: Scope) ->Element {
                     MenuItem {item_type: MenuItemType::Transactions, url: "/home/transactions", d:"M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}
                     DropdownMenuItem {}
                 }
-            }    
+            }
+               
         }
+       
+        if *show_notifications.read() == ShowNotications::Show{
+            render!{
+                div{class:" fixed overflow-hidden z-20 bg-gray-900 bg-opacity-25 inset-0 transform ease-in-out  transition-opacity opacity-100 duration-500 translate-x-0  ",
+                // class:"fixed overflow-hidden z-20 bg-gray-900 bg-opacity-25 inset-0 transform ease-in-out  transition-all delay-500 opacity-0 translate-x-full  ",
+                    section{class:"w-80 md:w-96  right-0 absolute bg-base-100 h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform   translate-x-0 ",
+                        div{class:"relative  pb-5 flex flex-col  h-full",
+                            div{class:"navbar   flex pl-4 pr-4   shadow-md ",
+                                button{
+                                    onclick: move |_|show_notifications.with_mut(|m|*m=ShowNotications::Hide),
+                                    svg{xmlns:"http://www.w3.org/2000/svg",  stroke:"currentColor" ,class:"h-5 inline-block w-5 stroke-1 ",
+                                        path{d:"M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"}
+                                    }
+                                }
+                                span{class:"ml-2 font-bold text-xl", "Notifications"}
+                            }
+                            div{class:"overflow-y-scroll pl-4 pr-4",
+                                div{class:"flex flex-col w-full",
+                                    div{class:"grid mt-3 card bg-base-200 rounded-box p-3 bg-blue-100","Your sales has increased by 30% yesterday"}
+                                    div{class:"grid mt-3 card bg-base-200 rounded-box p-3 bg-blue-100","Your sales has increased by 30% yesterday"}
+                                    div{class:"grid mt-3 card bg-base-200 rounded-box p-3 bg-blue-100","Your sales has increased by 30% yesterday"}
+                                    div{class:"grid mt-3 card bg-base-200 rounded-box p-3 bg-blue-100","Your sales has increased by 30% yesterday"}
+                                    div{class:"grid mt-3 card bg-base-200 rounded-box p-3 bg-blue-100","Your sales has increased by 30% yesterday"}
+                                    div{class:"grid mt-3 card bg-base-200 rounded-box p-3 bg-blue-100","Your sales has increased by 30% yesterday"}
+                                    div{class:"grid mt-3 card bg-base-200 rounded-box p-3 bg-blue-100","Your sales has increased by 30% yesterday"}
+                                    div{class:"grid mt-3 card bg-base-200 rounded-box p-3 bg-blue-100","Your sales has increased by 30% yesterday"}
+                                    div{class:"grid mt-3 card bg-base-200 rounded-box p-3 ","Your sales has increased by 30% yesterday"}
+
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+            
     }
 }
