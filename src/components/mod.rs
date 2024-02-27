@@ -9,3 +9,6 @@ pub mod menu_item;
 pub mod leads;
 pub mod transactions;
 pub mod dropdown_menu_item;
+pub mod customized_svg;
+pub mod notifications;
+pub mod bell;
