@@ -10,12 +10,19 @@ pub fn Notifications(cx: Scope) -> Element {
     let notification_list = use_shared_state::<NotificationList>(cx).unwrap();
     let notifs = notification_list.read();
 
+    
+
     let nodes = notifs.iter().map(|n|{
         let n1 = n.clone();
         rsx!{
             div{class:"grid mt-3 card bg-base-200 rounded-box p-3 ",
-                onclick:move |_|{
-                    info!("c {n1:?}")
+                prevent_default:"onclick",
+                ondblclick:move |_|{
+                    notification_list.with_mut(|list:&mut NotificationList|{
+                        if let Some(index) = list.iter().position(|value| *value == n1) {
+                            list.swap_remove(index);
+                        }
+                    })
                 },
                 "{n.level:?}: {n1.msg}",
             }
