@@ -82,13 +82,43 @@ pub fn Home(cx: Scope) -> Element {
                             onclick: move |_|{
                                 notification_list.with_mut(|m|(*m).push(
                                     NotificationMsg {
-                                        level: NotificationLevels::Warn,
-                                        msg: "a new notification".to_string()
+                                        level: NotificationLevels::Info,
+                                        msg: "a new info notification".to_string()
                                     }
                                 ))
                             },
                             CustomizedSvg6 {d:"M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"},
-                            "Send Notification"
+                            "Send Notification(info)"
+                        },
+                        
+                    }
+                    li{class:"",
+                        a{
+                            onclick: move |_|{
+                                notification_list.with_mut(|m|(*m).push(
+                                    NotificationMsg {
+                                        level: NotificationLevels::Warn,
+                                        msg: "a new warn notification".to_string()
+                                    }
+                                ))
+                            },
+                            CustomizedSvg6 {d:"M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"},
+                            "Send Notification(warn)"
+                        },
+                        
+                    }
+                    li{class:"",
+                        a{
+                            onclick: move |_|{
+                                notification_list.with_mut(|m|(*m).push(
+                                    NotificationMsg {
+                                        level: NotificationLevels::Error,
+                                        msg: "a new error notification".to_string()
+                                    }
+                                ))
+                            },
+                            CustomizedSvg6 {d:"M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"},
+                            "Send Notification(error)"
                         },
                         
                     }
