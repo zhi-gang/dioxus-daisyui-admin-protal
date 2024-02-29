@@ -1,7 +1,11 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
 use dioxus_router::{components::Link, hooks::use_navigator};
+use fermi::use_set;
 use log::info;
+
+use crate::app::USERNAME;
+
 #[component]
 pub fn LoginForm(cx: Scope) -> Element {
     let nav = use_navigator(cx);
@@ -20,6 +24,8 @@ pub fn LoginForm(cx: Scope) -> Element {
                     }else{
                         info!("login: user: {:?}, pwd: {:?} ", ev.values["username"].get(0).unwrap(),ev.values["password"].get(0).unwrap());
                         //invok auth api
+                        let set_name = use_set(cx, &USERNAME);
+                        set_name(ev.values["username"].get(0).unwrap().clone());
                         nav.push("/home");
                     }
                     ev.stop_propagation();

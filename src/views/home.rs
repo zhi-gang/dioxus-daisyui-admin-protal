@@ -1,14 +1,19 @@
 #![allow(non_snake_case)]
+use crate::app::USERNAME;
 use dioxus::prelude::*;
 use dioxus_router::components::{Link, Outlet};
+use dioxus_router::hooks::use_navigator;
+use fermi::use_read;
+use log::warn;
 // use log::info;
 
 use crate::{
     components::{
-        bell::Bell, customized_svg::CustomizedSvg5, dropdown_menu_item::DropdownMenuItem, menu_item::MenuItem, notification_maker::NotificationMaker, notifications::Notifications, theme::Theme
+        bell::Bell, customized_svg::CustomizedSvg5, dropdown_menu_item::DropdownMenuItem,
+        menu_item::MenuItem, notification_maker::NotificationMaker, notifications::Notifications,
+        theme::Theme,
     },
     route::Route,
-    // services::notification::{NotificationLevels, NotificationList, NotificationMsg},
 };
 
 #[derive(Debug, PartialEq, Clone)]
@@ -37,6 +42,14 @@ impl MenuItemType {
 }
 
 pub fn Home(cx: Scope) -> Element {
+    //check if logged in
+    let nav = use_navigator(cx);
+    let name = use_read(cx, &USERNAME);
+    if name.len() == 0 {
+        warn!("illeagle access, please login first.");
+        nav.push("/");
+    };
+
     use_shared_state_provider::<MenuItemType>(cx, || MenuItemType::Home);
     let menu_selection = use_shared_state::<MenuItemType>(cx).unwrap();
     use_shared_state_provider::<ShowNotications>(cx, || ShowNotications::Hide);
@@ -86,7 +99,7 @@ pub fn Home(cx: Scope) -> Element {
                         }
                     }
                 }
-                
+
             }
             div{class:"drawer-side z-30",
                 label{r#for:"my-drawer-2" , class:"drawer-overlay"}
@@ -111,6 +124,6 @@ pub fn Home(cx: Scope) -> Element {
             render!{Notifications {}}
         }
 
-       
+
     }
 }
