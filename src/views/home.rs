@@ -59,7 +59,34 @@ pub fn Home(cx: Scope) -> Element {
                 }
                 main{class:"flex-1 overflow-y-auto md:pt-4 pt-4 px-6  bg-base-200",
                     Outlet::<Route> {}
+                    div{id:"toast", class:"toast max-h-80 max-w-10 overflow-y-auto",
+                        div{class:"alert alert-info ",
+                            span{"New mail arrived."}
+                        }
+                        div{class:"alert alert-success",
+                            span{"Message sent successfully."}
+                        }
+                        div{class:"alert alert-info ",
+                            span{"New mail arrived."}
+                        }
+                        div{class:"alert alert-success",
+                            span{"Message sent successfully."}
+                        }
+                        div{class:"alert alert-info ",
+                            span{"New mail arrived."}
+                        }
+                        div{class:"alert alert-success max-w-10",
+                            span{"Message sent successfully--------------------------------."}
+                        }
+                        div{class:"alert alert-info ",
+                            span{"New mail arrived."}
+                        }
+                        div{class:"alert alert-success",
+                            span{"Message sent successfully."}
+                        }
+                    }
                 }
+                
             }
             div{class:"drawer-side z-30",
                 label{r#for:"my-drawer-2" , class:"drawer-overlay"}
@@ -83,5 +110,7 @@ pub fn Home(cx: Scope) -> Element {
         if *show_notifications.read() == ShowNotications::Show{
             render!{Notifications {}}
         }
+
+       
     }
 }

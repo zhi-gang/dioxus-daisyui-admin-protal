@@ -22,15 +22,6 @@ pub fn Notifications(cx: Scope) -> Element {
         rsx!{
             
             div{class:"grid mt-3 card bg-base-200 rounded-box p-3 ",
-                // prevent_default:"onclick",
-                // ondblclick:move |_|{
-                //     info!("remove");
-                //     notification_list.with_mut(|list:&mut NotificationList|{
-                //         if let Some(index) = list.iter().position(|value| *value == n1) {
-                //             list.remove(index);
-                //         }
-                //     })
-                // },
                 div{class:"flex items-stretch",
                     div{class:"flex-1",
                         span{class:"flex-1, absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg {bg}"}
@@ -67,9 +58,7 @@ pub fn Notifications(cx: Scope) -> Element {
                         div{class:"flex flex-col w-full",
                             nodes    
                         }
-                        
                     }
-                    
                 }
             }
         } 

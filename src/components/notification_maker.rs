@@ -1,5 +1,6 @@
 #![allow(non_snake_case)]
 
+use chrono::Utc;
 use dioxus::prelude::*;
 
 use crate::{components::customized_svg::CustomizedSvg6, services::notification::{NotificationLevels, NotificationList, NotificationMsg}};
@@ -22,12 +23,13 @@ pub fn NotificationMaker(cx: Scope) -> Element {
                                 notification_list.with_mut(|m|(*m).push(
                                     NotificationMsg {
                                         level: NotificationLevels::Info,
-                                        msg: "a new info notification that has long long long long long long long long long long long long long long long long long long text".to_string()
+                                        msg: "a new info notification that has long long long long long long long long long long long long long long long long long long text".to_string(),
+                                        create_at:Utc::now()
                                     }
                                 ))
                             },
                             CustomizedSvg6 {d:"M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"},
-                            "Send Notification(info)"
+                            "Send Notification(info)",
                         },
                         
                     }
@@ -37,7 +39,8 @@ pub fn NotificationMaker(cx: Scope) -> Element {
                                 notification_list.with_mut(|m|(*m).push(
                                     NotificationMsg {
                                         level: NotificationLevels::Warn,
-                                        msg: "a new warn notification".to_string()
+                                        msg: "a new warn notification".to_string(),
+                                        create_at:Utc::now()
                                     }
                                 ))
                             },
@@ -52,7 +55,8 @@ pub fn NotificationMaker(cx: Scope) -> Element {
                                 notification_list.with_mut(|m|(*m).push(
                                     NotificationMsg {
                                         level: NotificationLevels::Error,
-                                        msg: "a new error notification".to_string()
+                                        msg: "a new error notification".to_string(),
+                                        create_at:Utc::now()
                                     }
                                 ))
                             },
