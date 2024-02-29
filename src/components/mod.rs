@@ -13,3 +13,4 @@ pub mod customized_svg;
 pub mod notifications;
 pub mod bell;
 pub mod notification_maker;
+pub mod toast;

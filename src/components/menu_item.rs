@@ -2,7 +2,7 @@
 
 use dioxus::prelude::*;
 use dioxus_router::components::Link;
-use crate::{components::customized_svg::CustomizedSvg6, views::home::MenuItemType};
+use crate::{components::customized_svg::CustomizedSvg, views::home::MenuItemType};
 
 #[component]
 pub fn MenuItem<'a>(cx: Scope, item_type: MenuItemType ,url: &'a str, d:&'a str) -> Element {
@@ -10,7 +10,7 @@ pub fn MenuItem<'a>(cx: Scope, item_type: MenuItemType ,url: &'a str, d:&'a str)
     render!{
         li{class:"",
             Link{to:*url,
-                CustomizedSvg6 {d:"{d}"}
+                CustomizedSvg {s:6, d:"{d}"}
                 onclick: move |_|menu_selection.with_mut(|m|*m = item_type.clone()),
                 if *menu_selection.read() == *item_type{
                     // bolded.set("font-bold");

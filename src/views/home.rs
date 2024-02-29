@@ -1,5 +1,6 @@
 #![allow(non_snake_case)]
 use crate::app::USERNAME;
+use crate::components::toast::Toast;
 use dioxus::prelude::*;
 use dioxus_router::components::{Link, Outlet};
 use dioxus_router::hooks::use_navigator;
@@ -9,7 +10,7 @@ use log::warn;
 
 use crate::{
     components::{
-        bell::Bell, customized_svg::CustomizedSvg5, dropdown_menu_item::DropdownMenuItem,
+        bell::Bell, customized_svg::CustomizedSvg, dropdown_menu_item::DropdownMenuItem,
         menu_item::MenuItem, notification_maker::NotificationMaker, notifications::Notifications,
         theme::Theme,
     },
@@ -47,7 +48,7 @@ pub fn Home(cx: Scope) -> Element {
     let name = use_read(cx, &USERNAME);
     if name.len() == 0 {
         warn!("illeagle access, please login first.");
-        nav.push("/");
+        // nav.push("/");
     };
 
     use_shared_state_provider::<MenuItemType>(cx, || MenuItemType::Home);
@@ -63,43 +64,17 @@ pub fn Home(cx: Scope) -> Element {
                 div{class:"navbar sticky top-0 bg-base-100  z-10 shadow-md ",
                     div{class:"flex-1",
                         label{r#for:"my-drawer-2", class:"btn btn-primary drawer-button lg:hidden",
-                            CustomizedSvg5{d:"M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"}
+                            CustomizedSvg{s:5, d:"M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"}
                         }
                         h1{class:"text-2xl font-semibold ml-2","{(*menu_selection.read()).to_string()}"}
                     }
                     Theme {}
                     Bell {}
                 }
-                main{class:"flex-1 overflow-y-auto md:pt-4 pt-4 px-6  bg-base-200",
+                main{class:"flex-1 overflow-y-auto md:pt-4 pt-4 px-6 bg-base-200",
                     Outlet::<Route> {}
-                    div{id:"toast", class:"toast max-h-80 max-w-10 overflow-y-auto",
-                        div{class:"alert alert-info ",
-                            span{"New mail arrived."}
-                        }
-                        div{class:"alert alert-success",
-                            span{"Message sent successfully."}
-                        }
-                        div{class:"alert alert-info ",
-                            span{"New mail arrived."}
-                        }
-                        div{class:"alert alert-success",
-                            span{"Message sent successfully."}
-                        }
-                        div{class:"alert alert-info ",
-                            span{"New mail arrived."}
-                        }
-                        div{class:"alert alert-success max-w-10",
-                            span{"Message sent successfully--------------------------------."}
-                        }
-                        div{class:"alert alert-info ",
-                            span{"New mail arrived."}
-                        }
-                        div{class:"alert alert-success",
-                            span{"Message sent successfully."}
-                        }
-                    }
+                    Toast {}
                 }
-
             }
             div{class:"drawer-side z-30",
                 label{r#for:"my-drawer-2" , class:"drawer-overlay"}
