@@ -29,7 +29,6 @@ pub fn Notifications(cx: Scope) -> Element {
                     }
                     div{class:"flex-none justify-items-end",
                         onclick:move |_|{
-                            info!("remove");
                             notification_list.with_mut(|list:&mut NotificationList|{
                                 if let Some(index) = list.iter().position(|value| *value == n2) {
                                     list.remove(index);
