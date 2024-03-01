@@ -44,7 +44,7 @@ impl MenuItemType {
 
 pub fn Home(cx: Scope) -> Element {
     //check if logged in
-    let nav = use_navigator(cx);
+    // let nav = use_navigator(cx);
     let name = use_read(cx, &USERNAME);
     if name.len() == 0 {
         warn!("illeagle access, please login first.");
