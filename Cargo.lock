@@ -682,6 +682,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
+ "web-sys",
 ]
 
 [[package]]
