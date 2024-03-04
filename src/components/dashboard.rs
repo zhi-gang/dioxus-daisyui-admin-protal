@@ -3,7 +3,57 @@ use dioxus::prelude::*;
 
 use crate::components::customized_svg::CustomizedSvg;
 pub(crate) fn Dashboard(cx: Scope) -> Element {
+    let create_eval = use_eval(cx);
+    let _eval = create_eval(r#"
+    setTimeout(function(){
+    const ctx = document.getElementById('myChart');
+
+    const data = {
+        labels: [
+            'Food & beverages',
+            'Groceries',
+            'Gaming',
+            'Trip & holiday',
+        ],
+        datasets: [{
+            label: 'Total Expenses',
+            data: [148, 150, 130, 170],
+            backgroundColor: [
+                '#3B82F6',
+                '#10B981',
+                '#6366F1',
+                '#F59E0B'
+            ]
+        }]
+    };
+
+    const config = {
+        type: 'polarArea',
+        data: data,
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+            }
+        }
+    };
+
+    const chart = new Chart(ctx, config);
+    }, 2000);
+    "#).unwrap();
+
+
     render!(
+        div{class:"fixed bottom-4 right-4 xl:right-20",
+            a{href:"#", target:"_blank",
+            class:"transform duration-500 ease-in-out animate-bounce bg-yellow-400 px-4 py-3 font-mono font-semibold rounded-lg shadow hover:shadow-xl flex justify-between items-center gap-4",
+            img{class:"w-8 h-8 rounded",
+                src:"https://img.buymeacoffee.com/api/?name=Ejul&size=300&bg-image=bmc&background=5F7FFF",
+                alt:"buymeacoffee"}
+            "Buy Me A Coffee"
+            }
+        }
         main{class:"container mx-w-6xl mx-auto py-4",
             div{class:"flex flex-col space-y-8",
                 //start first row

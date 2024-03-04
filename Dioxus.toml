@@ -38,7 +38,7 @@ script = []
 
 # Javascript code file
 # serve: [dev-server] only
-script = []
+script = ["https://cdn.jsdelivr.net/npm/chart.js"]
 
 [application.plugins]
 
