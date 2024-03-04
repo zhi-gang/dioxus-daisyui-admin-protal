@@ -3,7 +3,7 @@ use crate::app::USERNAME;
 use crate::components::toast::Toast;
 use dioxus::prelude::*;
 use dioxus_router::components::{Link, Outlet};
-use dioxus_router::hooks::use_navigator;
+// use dioxus_router::hooks::use_navigator;
 use fermi::use_read;
 use log::warn;
 // use log::info;
@@ -98,7 +98,5 @@ pub fn Home(cx: Scope) -> Element {
         if *show_notifications.read() == ShowNotications::Show{
             render!{Notifications {}}
         }
-
-
     }
 }
