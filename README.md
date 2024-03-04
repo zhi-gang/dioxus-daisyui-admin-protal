@@ -2,7 +2,12 @@
 * It try to develop a administrator portal on both Web and Desktop.
 * It used Tailwind and DaisyUI. Has to install them by npm or others.
 * Run it with `dx serve --features web --release` for Web or `dx serve --features desktop --platform desktop  --release` for desktop (Dioxus Cli required)
-* Referce : https://github.com/robbins23/daisyui-admin-dashboard-template
+* Referce : 
+  * https://github.com/robbins23/daisyui-admin-dashboard-template
+  * https://www.chartjs.org/
+  * https://tailwindcss.com/
+  * https://daisyui.com/
+  
 
 
 Screen Shots:
